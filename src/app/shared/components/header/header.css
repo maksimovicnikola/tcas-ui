@@ -1,0 +1,28 @@
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header-logo {
+  display: block;
+  height: 40px;
+  margin-right: 1.5rem;
+  object-fit: contain;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.logout-button {
+  background-color: var(--button-color) !important;
+  color: #fff !important;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.logout-button:hover, .logout-button:focus {
+  background-color: var(--button-color) !important;
+  filter: brightness(0.85);
+}

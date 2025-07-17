@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <img src="assets/logo.jpg" alt="TCAS UI Logo" class="header-logo" height="40" />
+  <span class="spacer"></span>
+  <span class="header-actions">
+    <button
+      mat-button
+      routerLink="/new-announcement"
+      aria-label="New Announcement"
+    >
+      New Announcement
+    </button>
+    <button
+      mat-button
+      routerLink="/current-announcement"
+      aria-label="Current Announcement"
+    >
+      Current Announcement
+    </button>
+    <button
+      mat-button
+      routerLink="/announcement-log"
+      aria-label="Announcement Log"
+    >
+      Announcement Log
+    </button>
+    <button
+      mat-icon-button
+      class="logout-button"
+      (click)="logout()"
+      aria-label="Logout"
+    >
+      <mat-icon>logout</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>

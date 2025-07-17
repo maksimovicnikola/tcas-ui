@@ -1,0 +1,16 @@
+<section class="current-announcement-container" aria-labelledby="current-announcement-title">
+  <h1 id="current-announcement-title">Current Announcement</h1>
+  <p>
+    There are currently no announcements.
+  </p>
+
+  <div>
+    <app-grid [dataLoader]="usersLoader" [columns]="userColumns"></app-grid>
+  </div>
+</section> 
+
+<ng-template #actionsCellTemplate let-row="row">
+  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onShow({ event: $event, row: row, actionType: 'one' })">Show</button>
+  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onReplay({ event: $event, row: row, actionType: 'two' })">Replay</button>
+  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onDeliver({ event: $event, row: row, actionType: 'two' })">Deliver</button>
+</ng-template>
