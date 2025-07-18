@@ -2,7 +2,7 @@ import { Component, TemplateRef, ViewChild, AfterViewInit, ChangeDetectorRef } f
 import { ColumnDef, GridComponent, GridData } from '../../shared/components/grid';
 import { Observable, of, delay } from 'rxjs';
 import { DateCellComponent } from '../../shared/components/date-cell/date-cell';
-import { ICurrentAnnouncement, CURRENT_ANNOUNCEMENTS } from '../../mock/current-announcement.data';
+import { ICurrentAnnouncement, CURRENT_ANNOUNCEMENTS } from '../../mock/current-announcement.mock';
 
 @Component({
   selector: 'app-current-announcement',

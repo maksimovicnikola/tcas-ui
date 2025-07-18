@@ -5,7 +5,7 @@ export interface ICurrentAnnouncement {
   status: 'waiting' | 'active' | 'completed' | 'failed';
 }
 
-export const CURRENT_ANNOUNCEMENTS: ICurrentAnnouncement[] = Array.from({ length: 50 }, (_, i) => ({
+export const CURRENT_ANNOUNCEMENTS: ICurrentAnnouncement[] = Array.from({ length: 147 }, (_, i) => ({
   name: `Announcement ${i + 1}`,
   startTime: new Date(Date.now() - Math.floor(Math.random() * 10000000000)),
   template: `Template ${i + 1}`,

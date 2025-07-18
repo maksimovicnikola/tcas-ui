@@ -3,4 +3,13 @@
   <p>
     No announcements have been logged yet.
   </p>
+  <div>
+    <app-grid [dataLoader]="usersLoader" [columns]="userColumns"></app-grid>
+  </div>
 </section> 
+
+<ng-template #actionsCellTemplate let-row="row">
+  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onPrint({ event: $event, row: row, actionType: 'one' })">Print</button>
+  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onSave({ event: $event, row: row, actionType: 'two' })">Save</button>
+  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onPlay({ event: $event, row: row, actionType: 'two' })">Play</button>
+</ng-template>
