@@ -1,21 +1,55 @@
-<section class="announcement-log-container" aria-labelledby="announcement-log-title">
-  <h1 id="announcement-log-title">Announcement Log</h1>
-  <p>
-    No announcements have been logged yet.
-  </p>
+<section class="p-5" aria-labelledby="announcement-log-title">
+  <h1 id="announcement-log-title" class="text-2xl font-bold mb-4">Announcement Log</h1>
+  
+  @if (error()) {
+    <mat-card class="mb-4 bg-red-50 border border-red-200">
+      <mat-card-content>
+        <p class="text-red-600 font-medium m-0">{{ error() }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  @if (isLoading()) {
+    <mat-card class="mb-4 bg-blue-50 border border-blue-200">
+      <mat-card-content>
+        <div class="flex items-center gap-3">
+          <mat-spinner diameter="20"></mat-spinner>
+          <p class="text-blue-600 font-medium m-0">Loading announcements...</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
   <div>
-    <app-grid [dataLoader]="usersLoader" [columns]="userColumns"></app-grid>
+    <app-grid [dataLoader]="usersLoader" [columns]="userColumns()"></app-grid>
   </div>
 </section> 
 
 <ng-template #actionsCellTemplate let-row="row">
-  <button mat-icon-button color="accent" class="font-bold cursor-pointer mx-3" (click)="onPrint({ event: $event, row: row, actionType: 'one' })" aria-label="Print">
-    <mat-icon>print</mat-icon>
-  </button>
-  <button mat-icon-button color="accent" class="font-bold cursor-pointer mx-3" (click)="onSave({ event: $event, row: row, actionType: 'two' })" aria-label="Save">
-    <mat-icon>save</mat-icon>
-  </button>
-  <button mat-icon-button color="accent" class="font-bold cursor-pointer mx-3" (click)="onPlay({ event: $event, row: row, actionType: 'two' })" aria-label="Play">
-    <mat-icon>volume_up</mat-icon>
-  </button>
+  <div class="flex gap-2">
+    <button 
+      mat-icon-button 
+      color="primary" 
+      class="text-blue-600 hover:text-blue-800 transition-colors" 
+      (click)="onPrint({ event: $event, row: row, actionType: 'one' })" 
+      aria-label="Print announcement">
+      <mat-icon>print</mat-icon>
+    </button>
+    <button 
+      mat-icon-button 
+      color="primary" 
+      class="text-blue-600 hover:text-blue-800 transition-colors" 
+      (click)="onSave({ event: $event, row: row, actionType: 'two' })" 
+      aria-label="Save announcement">
+      <mat-icon>save</mat-icon>
+    </button>
+    <button 
+      mat-icon-button 
+      color="primary" 
+      class="text-blue-600 hover:text-blue-800 transition-colors" 
+      (click)="onPlay({ event: $event, row: row, actionType: 'two' })" 
+      aria-label="Play announcement">
+      <mat-icon>volume_up</mat-icon>
+    </button>
+  </div>
 </ng-template>
