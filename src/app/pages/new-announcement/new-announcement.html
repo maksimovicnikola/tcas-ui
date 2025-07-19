@@ -1,6 +1,266 @@
-<section class="new-announcement-container" aria-labelledby="new-announcement-title">
-  <h1 id="new-announcement-title">New Announcement</h1>
-  <p>
-    Use this page to create a new announcement.
-  </p>
-</section> 
+<div class="min-h-screen bg-gray-50 flex flex-col">
+  <!-- Main Content -->
+  <main class="flex-1 p-8 max-w-7xl mx-auto w-full">
+    <!-- Top Row: Announcement Template and Message for Recipient -->
+    <div class="flex flex-col lg:flex-row gap-8 mb-8">
+      <!-- Announcement Template Card -->
+      <mat-card class="bg-white rounded-lg shadow-md overflow-hidden flex-1">
+        <mat-card-content class="p-6">
+          <h2
+            class="text-xl font-semibold text-gray-800 mb-6 uppercase tracking-wide"
+          >
+            ANNOUNCEMENT TEMPLATE
+          </h2>
+
+          <mat-form-field class="w-full mb-4">
+            <mat-label class="text-gray-700">Template</mat-label>
+            <mat-select
+              [value]="formData().template"
+              (selectionChange)="onTemplateChange($event)"
+              class="text-gray-800"
+            >
+              <mat-option
+                *ngFor="let template of templates()"
+                [value]="template.value"
+                class="text-gray-700"
+              >
+                {{ template.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label class="text-gray-700">Announcement Text</mat-label>
+            <textarea
+              matInput
+              placeholder="Enter your announcement text here..."
+              [value]="formData().announcementText"
+              (input)="onAnnouncementTextChange($event)"
+              rows="6"
+              class="text-gray-800"
+            >
+            </textarea>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Message for Recipient Card -->
+      <mat-card class="bg-white rounded-lg shadow-md overflow-hidden flex-1">
+        <mat-card-content class="p-6">
+          <h2
+            class="text-xl font-semibold text-gray-800 mb-6 uppercase tracking-wide"
+          >
+            MESSAGE FOR RECIPIENT
+          </h2>
+
+          <mat-form-field class="w-full mb-4">
+            <mat-label class="text-gray-700">From</mat-label>
+            <input
+              matInput
+              type="text"
+              [value]="formData().from"
+              (input)="onFromChange($event)"
+              placeholder="Enter sender name"
+              class="text-gray-800"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="w-full">
+            <mat-label class="text-gray-700">Message for Recipient</mat-label>
+            <textarea
+              matInput
+              placeholder="Type a private message for the recipient here"
+              [value]="formData().messageForRecipient"
+              (input)="onMessageForRecipientChange($event)"
+              rows="8"
+              class="text-gray-800"
+            >
+            </textarea>
+          </mat-form-field>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Bottom Row: Announcement Settings (Full Width) -->
+    <div class="mb-8">
+      <mat-card class="bg-white rounded-lg shadow-md overflow-hidden">
+        <mat-card-content class="p-6">
+          <h2
+            class="text-xl font-semibold text-gray-800 mb-6 uppercase tracking-wide"
+          >
+            ANNOUNCEMENT SETTINGS
+          </h2>
+
+          <div class="flex flex-col md:flex-row lg:flex-row gap-6 mb-6">
+            <!-- Destination -->
+            <mat-form-field class="w-full md:w-1/3 lg:w-1/3">
+              <mat-label class="text-gray-700">Destination</mat-label>
+              <mat-select
+                [value]="formData().settings.destination"
+                (selectionChange)="onDestinationChange($event)"
+                class="text-gray-800"
+              >
+                <mat-option
+                  *ngFor="let dest of destinations()"
+                  [value]="dest.value"
+                  class="text-gray-700"
+                >
+                  {{ dest.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <!-- Number of Plays -->
+            <mat-form-field class="w-full md:w-1/3 lg:w-1/3">
+              <mat-label class="text-gray-700">Number of Plays</mat-label>
+              <input
+                matInput
+                type="number"
+                [value]="formData().settings.numberOfPlays"
+                (input)="onNumberOfPlaysChange($event)"
+                min="1"
+                max="100"
+                class="text-gray-800"
+              />
+            </mat-form-field>
+
+            <!-- Minutes Between -->
+            <mat-form-field class="w-full md:w-1/3 lg:w-1/3">
+              <mat-label class="text-gray-700">Minutes Between</mat-label>
+              <input
+                matInput
+                type="number"
+                [value]="formData().settings.minutesBetween"
+                (input)="onMinutesBetweenChange($event)"
+                min="1"
+                max="60"
+                class="text-gray-800"
+              />
+            </mat-form-field>
+          </div>
+
+          <!-- Start Time Section -->
+          <div class="mb-6">
+            <label class="block font-medium text-gray-700 mb-3"
+              >Start Time:</label
+            >
+            <div class="flex flex-col sm:flex-row items-center gap-4">
+              <mat-radio-group
+                [value]="formData().settings.startTime"
+                (change)="onStartTimeChange($event)"
+                class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4"
+              >
+                <mat-radio-button value="immediately" class="text-gray-700">
+                  Immediately
+                </mat-radio-button>
+                <mat-radio-button value="specified" class="text-gray-700">
+                  at specified time:
+                </mat-radio-button>
+              </mat-radio-group>
+
+              <!-- Time Inputs Row -->
+              <div
+                class="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2"
+                *ngIf="formData().settings.startTime === 'specified'"
+              >
+                <mat-form-field class="w-full sm:w-24">
+                  <mat-label class="text-gray-700">Hours</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [value]="formData().settings.specifiedTime.hours"
+                    (input)="onHoursChange($event)"
+                    min="1"
+                    max="12"
+                    class="text-gray-800"
+                  />
+                </mat-form-field>
+
+                <span class="text-xl font-medium text-gray-700">:</span>
+
+                <mat-form-field class="w-full sm:w-24">
+                  <mat-label class="text-gray-700">Minutes</mat-label>
+                  <input
+                    matInput
+                    type="number"
+                    [value]="formData().settings.specifiedTime.minutes"
+                    (input)="onMinutesChange($event)"
+                    min="0"
+                    max="59"
+                    class="text-gray-800"
+                  />
+                </mat-form-field>
+
+                <mat-form-field class="w-full sm:w-24">
+                  <mat-label class="text-gray-700">Period</mat-label>
+                  <mat-select
+                    [value]="formData().settings.specifiedTime.period"
+                    (selectionChange)="onPeriodChange($event)"
+                    class="text-gray-800"
+                  >
+                    <mat-option value="AM" class="text-gray-700">AM</mat-option>
+                    <mat-option value="PM" class="text-gray-700">PM</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <!-- Languages Section -->
+          <div>
+            <label class="block font-medium text-gray-700 mb-3"
+              >Languages:</label
+            >
+            <div class="flex flex-wrap gap-3">
+              <mat-checkbox
+                *ngFor="let language of languages()"
+                [checked]="language.checked"
+                (change)="onLanguageToggle(language.id)"
+                class="text-gray-700 flex-shrink-0"
+              >
+                {{ language.name }}
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
+      <button
+        mat-raised-button
+        color="primary"
+        class="flex items-center justify-center gap-2 px-6 py-3 min-w-[200px] font-semibold uppercase tracking-wide"
+        (click)="onSubmitTextToSpeech()"
+      >
+        <mat-icon class="text-white">volume_up</mat-icon>
+        <span class="text-white">TEXT-TO-SPEECH ANNOUNCEMENT</span>
+      </button>
+
+      <button
+        mat-raised-button
+        color="accent"
+        class="flex items-center justify-center gap-2 px-6 py-3 min-w-[200px] font-semibold uppercase tracking-wide"
+        (click)="onSubmitRecordVoice()"
+      >
+        <mat-icon class="text-white">fiber_manual_record</mat-icon>
+        <span class="text-white">RECORD VOICE ANNOUNCEMENT</span>
+      </button>
+
+      <button
+        mat-raised-button
+        color="warn"
+        class="flex items-center justify-center gap-2 px-6 py-3 min-w-[200px] font-semibold uppercase tracking-wide"
+        (click)="onSubmitLive()"
+      >
+        <mat-icon class="text-white">mic</mat-icon>
+        <span class="text-white">LIVE ANNOUNCEMENT</span>
+      </button>
+    </div>
+
+    <div class="text-center text-gray-500 text-sm mb-8">
+      Version 3.2.0 12/1/2024
+    </div>
+  </main>
+</div>

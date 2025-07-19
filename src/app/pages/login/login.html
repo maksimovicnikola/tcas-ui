@@ -1,27 +1,28 @@
 <div class="login-container">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Welcome Back!</mat-card-title>
+      <mat-card-title>USER LOGIN</mat-card-title>
       <mat-card-subtitle>Please enter your credentials to login.</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form (submit)="onSubmit()">
         <!-- Email Field -->
         <mat-form-field appearance="outline">
           <mat-label>Email</mat-label>
           <input
             matInput
-            formControlName="email"
             type="email"
             placeholder="example@email.com"
+            [value]="formData().email"
+            (input)="onEmailChange($event)"
             required
             />
-          @if (email?.hasError('required')) {
+          @if (emailErrors().required) {
             <mat-error>
               Email address is required.
             </mat-error>
           }
-          @if (email?.hasError('email')) {
+          @if (emailErrors().email) {
             <mat-error>
               Please enter a valid email address.
             </mat-error>
@@ -33,9 +34,10 @@
           <mat-label>Password</mat-label>
           <input
             matInput
-            formControlName="password"
-            [type]="hidePassword ? 'password' : 'text'"
+            [type]="hidePassword() ? 'password' : 'text'"
             placeholder="Enter your password"
+            [value]="formData().password"
+            (input)="onPasswordChange($event)"
             required
             />
           <button
@@ -46,17 +48,36 @@
             aria-label="Toggle password visibility"
             >
             <mat-icon>{{
-              hidePassword ? 'visibility_off' : 'visibility'
+              hidePassword() ? 'visibility_off' : 'visibility'
             }}</mat-icon>
           </button>
-          @if (password?.hasError('required')) {
+          @if (passwordErrors().required) {
             <mat-error>
               Password is required.
             </mat-error>
           }
         </mat-form-field>
 
-        @if (loginInvalid) {
+        <!-- Gate Field -->
+        <mat-form-field appearance="outline">
+          <mat-label>Gate</mat-label>
+          <mat-select
+            [value]="formData().gate"
+            (selectionChange)="onGateChange($event)"
+            required
+            >
+            @for (gate of gateOptions; track gate) {
+              <mat-option [value]="gate">{{ gate }}</mat-option>
+            }
+          </mat-select>
+          @if (gateErrors().required) {
+            <mat-error>
+              Gate selection is required.
+            </mat-error>
+          }
+        </mat-form-field>
+
+        @if (loginInvalid()) {
           <mat-error class="login-error">
             Invalid email or password.
           </mat-error>
@@ -66,13 +87,14 @@
           mat-raised-button
           color="primary"
           class="login-button"
-          type="submit"
-          [disabled]="loginForm.invalid || isLoading"
+          type="button"
+          (click)="onSubmit()"
+          [disabled]="!isFormValid() || isLoading()"
           >
-          @if (!isLoading) {
+          @if (!isLoading()) {
             <span>Login</span>
           }
-          @if (isLoading) {
+          @if (isLoading()) {
             <mat-spinner [diameter]="24"></mat-spinner>
           }
         </button>

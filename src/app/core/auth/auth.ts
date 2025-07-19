@@ -8,9 +8,9 @@ import { delay } from 'rxjs/operators';
 export class AuthService {
   isAuthenticated = signal<boolean>(false);
 
-  login(email: string, password: string): Observable<boolean> {
+  login(email: string, password: string, gate: string): Observable<boolean> {
     const areCredentialsValid =
-      email === 'test@test' && password === 'test';
+      email === 'test@test.com' && password === 'test' && gate === 'A64';
 
     return of(areCredentialsValid).pipe(
       delay(500), // Simulate network latency

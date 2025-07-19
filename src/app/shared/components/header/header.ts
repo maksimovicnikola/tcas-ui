@@ -18,6 +18,14 @@ export class HeaderComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
 
+  getCurrentTime(): string {
+    return new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+  }
+
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);
