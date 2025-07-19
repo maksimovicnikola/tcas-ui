@@ -4,11 +4,13 @@ import { DateCellComponent } from '../../shared/components/date-cell/date-cell';
 import { ColumnDef, GridComponent, GridData } from '../../shared/components/grid';
 import { ANNOUNCEMENT_LOG, IAnnouncementLog } from '../../mock/announcement-log.mock';
 import { LabelComponent } from '../../shared/components/label/label';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-announcement-log',
   standalone: true,
-  imports: [GridComponent],
+  imports: [GridComponent, MatIconModule, MatButtonModule],
   templateUrl: './announcement-log.html',
   styleUrl: './announcement-log.css',
 })

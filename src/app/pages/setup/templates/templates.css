@@ -1,0 +1,13 @@
+.templates-container {
+  padding: 20px;
+  height: 100%;
+}
+
+.templates-content {
+  padding: 20px 0;
+}
+
+.templates-content p {
+  margin: 10px 0;
+  color: #666;
+} 

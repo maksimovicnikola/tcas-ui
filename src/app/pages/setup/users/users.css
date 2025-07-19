@@ -1,0 +1,19 @@
+.users-container {
+  padding: 20px;
+  height: 100%;
+}
+
+.users-content {
+  padding: 20px 0;
+}
+
+.users-content h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.users-content p {
+  margin: 10px 0;
+  color: #666;
+  line-height: 1.6;
+} 

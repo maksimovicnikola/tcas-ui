@@ -1,0 +1,19 @@
+.settings-container {
+  padding: 20px;
+  height: 100%;
+}
+
+.settings-content {
+  padding: 20px 0;
+}
+
+.settings-content h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.settings-content p {
+  margin: 10px 0;
+  color: #666;
+  line-height: 1.6;
+} 

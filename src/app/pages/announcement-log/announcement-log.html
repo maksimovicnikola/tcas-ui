@@ -9,7 +9,13 @@
 </section> 
 
 <ng-template #actionsCellTemplate let-row="row">
-  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onPrint({ event: $event, row: row, actionType: 'one' })">Print</button>
-  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onSave({ event: $event, row: row, actionType: 'two' })">Save</button>
-  <button mat-icon-button color="primary" class="font-bold cursor-pointer text-(--primary-color) mx-3" (click)="onPlay({ event: $event, row: row, actionType: 'two' })">Play</button>
+  <button mat-icon-button color="accent" class="font-bold cursor-pointer mx-3" (click)="onPrint({ event: $event, row: row, actionType: 'one' })" aria-label="Print">
+    <mat-icon>print</mat-icon>
+  </button>
+  <button mat-icon-button color="accent" class="font-bold cursor-pointer mx-3" (click)="onSave({ event: $event, row: row, actionType: 'two' })" aria-label="Save">
+    <mat-icon>save</mat-icon>
+  </button>
+  <button mat-icon-button color="accent" class="font-bold cursor-pointer mx-3" (click)="onPlay({ event: $event, row: row, actionType: 'two' })" aria-label="Play">
+    <mat-icon>volume_up</mat-icon>
+  </button>
 </ng-template>

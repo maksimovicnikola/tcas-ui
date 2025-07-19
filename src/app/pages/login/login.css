@@ -52,6 +52,15 @@ mat-form-field {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: white !important;
+}
+
+::ng-deep .login-button .mat-mdc-progress-spinner {
+  color: white !important;
+}
+
+::ng-deep .login-button .mat-mdc-progress-spinner circle {
+  stroke: white !important;
 }
 
 ::ng-deep .mat-mdc-notch-piece.mdc-notched-outline__notch {

@@ -1,0 +1,19 @@
+.variables-container {
+  padding: 20px;
+  height: 100%;
+}
+
+.variables-content {
+  padding: 20px 0;
+}
+
+.variables-content h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.variables-content p {
+  margin: 10px 0;
+  color: #666;
+  line-height: 1.6;
+} 

@@ -34,6 +34,38 @@ export const routes: Routes = [
           import('./pages/announcement-log/announcement-log').then((m) => m.AnnouncementLog),
       },
       {
+        path: 'setup',
+        loadComponent: () =>
+          import('./pages/setup/setup').then((m) => m.SetupComponent),
+        children: [
+          {
+            path: '',
+            redirectTo: 'templates',
+            pathMatch: 'full'
+          },
+          {
+            path: 'templates',
+            loadComponent: () =>
+              import('./pages/setup/templates/templates').then((m) => m.TemplatesComponent)
+          },
+          {
+            path: 'variables',
+            loadComponent: () =>
+              import('./pages/setup/variables/variables').then((m) => m.VariablesComponent)
+          },
+          {
+            path: 'settings',
+            loadComponent: () =>
+              import('./pages/setup/settings/settings').then((m) => m.SettingsComponent)
+          },
+          {
+            path: 'users',
+            loadComponent: () =>
+              import('./pages/setup/users/users').then((m) => m.UsersComponent)
+          }
+        ]
+      },
+      {
         path: 'main',
         redirectTo: '',
         pathMatch: 'full',

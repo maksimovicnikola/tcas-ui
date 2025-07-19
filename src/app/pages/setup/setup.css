@@ -1,0 +1,32 @@
+.setup-container {
+  padding: 20px;
+  height: 100%;
+}
+
+.setup-tabs {
+  height: 100%;
+}
+
+.tab-content {
+  padding: 20px;
+  height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+/* Tab styling */
+::ng-deep .mat-mdc-tab-group {
+  height: 100%;
+}
+
+::ng-deep .mat-mdc-tab-body-wrapper {
+  height: calc(100% - 48px);
+}
+
+::ng-deep .mat-mdc-tab-body {
+  height: 100%;
+}
+
+::ng-deep .mat-mdc-tab-body-content {
+  height: 100%;
+  overflow: hidden;
+} 

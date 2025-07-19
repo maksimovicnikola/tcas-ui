@@ -1,0 +1,48 @@
+<div class="setup-container">
+  <mat-card>
+    <mat-card-content>
+      <mat-tab-group 
+        (selectedTabChange)="onTabChange($event)" 
+        [selectedIndex]="getCurrentTabIndex()"
+        class="setup-tabs">
+        
+        <!-- TEMPLATES Tab -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>description</mat-icon>
+            <span>TEMPLATES</span>
+          </ng-template>
+        </mat-tab>
+
+        <!-- VARIABLES Tab -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>code</mat-icon>
+            <span>VARIABLES</span>
+          </ng-template>
+        </mat-tab>
+
+        <!-- SETTINGS Tab -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>settings</mat-icon>
+            <span>SETTINGS</span>
+          </ng-template>
+        </mat-tab>
+
+        <!-- USERS Tab -->
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon>people</mat-icon>
+            <span>USERS</span>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+      
+      <!-- Single router-outlet for all tabs -->
+      <div class="tab-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
